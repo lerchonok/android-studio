@@ -1,6 +1,8 @@
 package ru.itmo.notes
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import ru.itmo.notes.db.MyDbManager
@@ -22,14 +24,9 @@ class MainActivity : ComponentActivity() {
         }*/
     }
 
-    fun onClickNew(view: TextView) {
-        /*tvTest.text = ""
-        myDbManager.insertToDb(edTitle.text.toString(), edContent.text.toString())
-        val dataList = myDbManager.readDbData()
-        for (item in dataList) {
-            tvTest.append(item)
-            tvTest.append("\n")
-        }*/
+    fun onClickNew(view: View) {
+        val i = Intent(this,EditActivity::class.java)
+        startActivity(i)
     }
 
     override fun onDestroy() {

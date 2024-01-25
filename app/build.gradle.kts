@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "ru.itmo.notes"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "ru.itmo.notes"
