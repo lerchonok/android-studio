@@ -5,23 +5,33 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+//import ru.itmo.notes.db.MyAdapter
 import ru.itmo.notes.db.MyDbManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : ComponentActivity() {
+
     val myDbManager = MyDbManager(this)
+    //val myAdapter = MyAdapter(ArrayList())
+
+    val rcView: RecyclerView by lazy { findViewById(R.id.rcView) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        init()
     }
 
     override fun onResume() {
         super.onResume()
         myDbManager.openDb()
-        val dataList = myDbManager.readDbData()
-       /* for (item in dataList) {
-            text.toString(item)
-            text.toString("\n")
-        }*/
+        //fillAdapter()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        myDbManager.closeDb()
     }
 
     fun onClickNew(view: View) {
@@ -29,8 +39,12 @@ class MainActivity : ComponentActivity() {
         startActivity(i)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        myDbManager.closeDb()
+    fun init() {
+        rcView.layoutManager = LinearLayoutManager(this)
+        //rcView.adapter = myAdapter
+    }
+
+    fun fillAdapter() {
+        //myAdapter.updateAdapter(myDbManager.readDbData())
     }
 }

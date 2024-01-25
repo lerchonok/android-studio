@@ -19,9 +19,10 @@
         android:background="@android:drawable/editbox_background_normal"
         android:backgroundTint="#E9F5FF"
         android:ems="10"
+        android:hint="@string/ed_title_hind"
         android:inputType="text"
-        android:text="Name"
         android:textColor="#3F4B55"
+        android:textColorHint="#CEDCE8"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -40,9 +41,10 @@
         android:backgroundTint="#E9F5FF"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="@string/ed_desc_hind"
         android:inputType="text|textImeMultiLine|textMultiLine"
-        android:text="Name"
         android:textColor="#3F4B55"
+        android:textColorHint="#CEDCE8"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +60,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#E9F5FF"
+        android:onClick="onClickSave"
         android:text="save"
         android:textColor="#3F4B55"
         app:layout_constraintBottom_toBottomOf="@+id/edDesc"
@@ -82,6 +85,7 @@
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginTop="4dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/edTitle"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edTitle"
@@ -118,6 +122,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_delete"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/fl_changeImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="onClickChange"
+            android:text="Button"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

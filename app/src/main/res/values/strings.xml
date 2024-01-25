@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="ed_title_hind">Заголовок</string>
+    <string name="ed_desc_hind">Текст</string>
 </resources>
