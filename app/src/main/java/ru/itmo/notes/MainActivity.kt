@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 //import ru.itmo.notes.db.MyAdapter
 import ru.itmo.notes.db.MyDbManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.itmo.notes.db.MyAdapter
 
 class MainActivity : ComponentActivity() {
 
     val myDbManager = MyDbManager(this)
-    //val myAdapter = MyAdapter(ArrayList())
+    val myAdapter = MyAdapter(ArrayList(), this)
 
     val rcView: RecyclerView by lazy { findViewById(R.id.rcView) }
+    val tvNoElements: TextView by lazy { findViewById(R.id.tvNoElements) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         myDbManager.openDb()
-        //fillAdapter()
+        fillAdapter()
     }
 
     override fun onDestroy() {
@@ -41,10 +43,16 @@ class MainActivity : ComponentActivity() {
 
     fun init() {
         rcView.layoutManager = LinearLayoutManager(this)
-        //rcView.adapter = myAdapter
+        rcView.adapter = myAdapter
     }
 
     fun fillAdapter() {
-        //myAdapter.updateAdapter(myDbManager.readDbData())
+
+        val list = myDbManager.readDbData()
+        myAdapter.updateAdapter(list)
+        if (list.size > 0) {
+            tvNoElements.visibility = View.GONE
+        } else tvNoElements.visibility = View.VISIBLE
+
     }
 }
