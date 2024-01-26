@@ -7,7 +7,7 @@
     android:layout_marginStart="3dp"
     android:layout_marginTop="3dp"
     android:layout_marginEnd="3dp"
-    android:background="#6C93B3">
+    android:background="#DAE7F1">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -17,11 +17,25 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:text="TextView"
-        android:textColor="#FDFDFD"
+        android:textColor="#4B5C6A"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textColor="#88959F"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

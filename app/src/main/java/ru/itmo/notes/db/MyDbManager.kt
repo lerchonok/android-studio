@@ -15,11 +15,12 @@ class MyDbManager(context: Context) {
         db = myDbHelper.writableDatabase
     }
 
-    fun insertToDb(title: String, content: String, uri: String) {
+    fun insertToDb(title: String, content: String, uri: String, time:String) {
         val values = ContentValues().apply {
             put(MyDbNameClass.COLUMN_NAME_TITLE, title)
             put(MyDbNameClass.COLUMN_NAME_CONTENT, content)
             put(MyDbNameClass.COLUMN_NAME_IMAGE_URI, uri)
+            put(MyDbNameClass.COLUMN_NAME_TIME, time)
 
         }
         db?.insert(MyDbNameClass.TABLE_NAME, null, values)
@@ -30,13 +31,14 @@ class MyDbManager(context: Context) {
         db?.delete(MyDbNameClass.TABLE_NAME, selection, null)
     }
 
-    fun updateItem(title: String, content: String, uri: String, id: Int) {
+    fun updateItem(title: String, content: String, uri: String, id: Int, time: String) {
 
         var selection = BaseColumns._ID + "=$id"
         val values = ContentValues().apply {
             put(MyDbNameClass.COLUMN_NAME_TITLE, title)
             put(MyDbNameClass.COLUMN_NAME_CONTENT, content)
             put(MyDbNameClass.COLUMN_NAME_IMAGE_URI, uri)
+            put(MyDbNameClass.COLUMN_NAME_TIME, time)
 
         }
         db?.update(MyDbNameClass.TABLE_NAME, values, selection, null)
@@ -54,12 +56,14 @@ class MyDbManager(context: Context) {
                 val dataCont = cursor?.getString(cursor.getColumnIndex(MyDbNameClass.COLUMN_NAME_CONTENT))
                 val dataUri = cursor?.getString(cursor.getColumnIndex(MyDbNameClass.COLUMN_NAME_IMAGE_URI))
                 val dataId = cursor?.getInt(cursor.getColumnIndex(BaseColumns._ID))
+                val time = cursor?.getString(cursor.getColumnIndex(MyDbNameClass.COLUMN_NAME_TIME))
                 var item = ListItem()
 
                 item.title = dataTitle!!
                 item.desc = dataCont!!
                 item.uri = dataUri!!
                 item.id = dataId!!
+                item.time = time!!
                 dataList.add(item)
             }
         }

@@ -1,9 +1,11 @@
 package ru.itmo.notes
 
 import android.app.Activity
+import android.icu.util.Calendar
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -13,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.itmo.notes.db.IntentConstants
 import ru.itmo.notes.db.MyDbManager
+import java.text.SimpleDateFormat
+import java.util.Locale
 import android.content.Intent as Intent
 
 class EditActivity : AppCompatActivity() {
@@ -42,6 +46,7 @@ class EditActivity : AppCompatActivity() {
         edDesc = findViewById(R.id.edDesc)
         fl_changeImage = findViewById(R.id.fl_changeImage)
         fl_delete = findViewById(R.id.fl_delete)
+
         getIntents()
     }
 
@@ -81,8 +86,8 @@ class EditActivity : AppCompatActivity() {
 
         if (myTitle != "" && myDesc != "") {
             if (isEditState) {
-                myDbManager.updateItem(myTitle, myDesc, tempImageURI, id)
-            } else myDbManager.insertToDb(myTitle, myDesc, tempImageURI)
+                myDbManager.updateItem(myTitle, myDesc, tempImageURI, id, getCurrentTime())
+            } else myDbManager.insertToDb(myTitle, myDesc, tempImageURI, getCurrentTime())
 
             finish()
         }
@@ -118,5 +123,11 @@ class EditActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun getCurrentTime():String {
+        val time = Calendar.getInstance().time
+        val formater = SimpleDateFormat("dd-MM-yy kk-mm", Locale.getDefault())
+        return formater.format(time)
     }
 }
