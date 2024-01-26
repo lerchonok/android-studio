@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 //import ru.itmo.notes.db.MyAdapter
 import ru.itmo.notes.db.MyDbManager
@@ -43,6 +44,8 @@ class MainActivity : ComponentActivity() {
 
     fun init() {
         rcView.layoutManager = LinearLayoutManager(this)
+        val swapHelper = getSwap()
+        swapHelper.attachToRecyclerView(rcView)
         rcView.adapter = myAdapter
     }
 
@@ -54,5 +57,22 @@ class MainActivity : ComponentActivity() {
             tvNoElements.visibility = View.GONE
         } else tvNoElements.visibility = View.VISIBLE
 
+    }
+
+    private fun getSwap(): ItemTouchHelper {
+        return ItemTouchHelper(object:ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                myAdapter.removeItem(viewHolder.adapterPosition, myDbManager)
+
+            }
+        })
     }
 }

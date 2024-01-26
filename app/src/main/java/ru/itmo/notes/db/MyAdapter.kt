@@ -30,6 +30,8 @@ class MyAdapter(listMain: ArrayList<ListItem>, contextM: Context) : RecyclerView
                     putExtra(IntentConstants.I_TITLE_KEY, item.title)
                     putExtra(IntentConstants.I_DESC_KEY, item.desc)
                     putExtra(IntentConstants.I_URI_KEY, item.uri)
+                    putExtra(IntentConstants.I_ID_KEY, item.id)
+
 
                 }
                 context.startActivity(intent)
@@ -54,5 +56,13 @@ class MyAdapter(listMain: ArrayList<ListItem>, contextM: Context) : RecyclerView
         listArray.clear()
         listArray.addAll(listtItems)
         notifyDataSetChanged()
+    }
+
+    fun removeItem(pos: Int, dbManager: MyDbManager) {
+
+        dbManager.removeFromDb(listArray[pos].id.toString())
+        listArray.removeAt(pos)
+        notifyItemRangeChanged(0, listArray.size)
+        notifyItemRemoved(pos)
     }
 }

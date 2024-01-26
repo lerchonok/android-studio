@@ -19,6 +19,8 @@ class EditActivity : AppCompatActivity() {
 
    val myDbManager = MyDbManager(this)
 
+    var isEditState = false
+
     lateinit var fl_photo: ImageView
     lateinit var mainImageLayout: ConstraintLayout
     lateinit var edTitle: TextView
@@ -26,6 +28,7 @@ class EditActivity : AppCompatActivity() {
     lateinit var fl_changeImage: Button
     lateinit var fl_delete: FloatingActionButton
 
+    var id = 0
     val imageRequestCode = 10
     var tempImageURI = "empty"
 
@@ -77,7 +80,10 @@ class EditActivity : AppCompatActivity() {
         val myDesc = edDesc.text.toString()
 
         if (myTitle != "" && myDesc != "") {
-            myDbManager.insertToDb(myTitle, myDesc, tempImageURI)
+            if (isEditState) {
+                myDbManager.updateItem(myTitle, myDesc, tempImageURI, id)
+            } else myDbManager.insertToDb(myTitle, myDesc, tempImageURI)
+
             finish()
         }
     }
@@ -98,7 +104,9 @@ class EditActivity : AppCompatActivity() {
 
                 fl_photo.visibility = View.GONE
                 edTitle.setText(i.getStringExtra(IntentConstants.I_TITLE_KEY))
+                isEditState = true
                 edDesc.setText(i.getStringExtra(IntentConstants.I_DESC_KEY))
+                id = i.getIntExtra(IntentConstants.I_ID_KEY, 0)
 
                 if (i.getStringExtra(IntentConstants.I_URI_KEY) != "empty") {
 
