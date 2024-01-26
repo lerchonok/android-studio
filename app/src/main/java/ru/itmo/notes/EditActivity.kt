@@ -67,6 +67,8 @@ class EditActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == imageRequestCode) {
             fl_photo.setImageURI(data?.data)
             tempImageURI = data?.data.toString()
+
+            contentResolver.takePersistableUriPermission(data?.data!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
     }
 
@@ -81,7 +83,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     fun onClickChange(view: View) {
-        val intent = Intent(Intent.ACTION_PICK) //ACTION__OPEN_DOCUMENT
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT) //ACTION_pick
         intent.type = "image/*"
        // intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION //это убрать
         startActivityForResult(intent, imageRequestCode)
